@@ -13,6 +13,7 @@ RSpec.describe Market do
     @item3 = Item.new({name: "Peach-Raspberry Nice Cream", price: "$5.30"})
     @item4 = Item.new({name: "Banana Nice Cream", price: "$4.25"})
   end
+
   describe 'market' do
     it 'exists' do
       expect(@market).to be_a(Market)
@@ -55,6 +56,21 @@ RSpec.describe Market do
 
       expected = ['Banana Nice Cream', 'Peach', 'Peach-Raspberry Nice Cream', 'Tomato']
       expect(@market.sorted_item_list).to eq(expected)
+    end
+
+    it 'reports quantities of all items sold at market' do 
+      @vendor1.stock(@item1, 35)
+      @vendor1.stock(@item2, 7)
+      @vendor2.stock(@item4, 50)
+      @market.add_vendor(@vendor1)
+      @market.add_vendor(@vendor2)
+      
+      expect(@market.total_inventory).to eq
+      {
+        @item1 => {:quantity => 35, :vendors => [@vendor1]},
+        @item2 => {:quantity => 7, :vendors => [@vendor1]},
+        @item3 => {:quantity => 50, :vendors => [@vendor2]}
+      }
     end
   end
 end
