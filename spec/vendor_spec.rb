@@ -12,7 +12,7 @@ RSpec.describe Vendor do
     @item4 = Item.new({name: "Banana Nice Cream", price: "$4.25"})
   end
 
-  describe 'item' do
+  describe 'vendor' do
     it 'exists and has attributes' do
       expect(@vendor).to be_a(Vendor)
       expect(@vendor.name).to eq('Rocky Mountain Fresh')
