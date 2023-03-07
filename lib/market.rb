@@ -63,10 +63,10 @@ class Market
     return false if total_inventory[item][:quantity] < quantity
     vendors_selling = total_inventory[item][:vendors]
     vendors_selling.each do |vendor|
+      require 'pry'; binding.pry
       stock = vendor.check_stock(item)
       if stock <= quantity
         quantity -= stock
-
       end
     end
   end

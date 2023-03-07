@@ -1,12 +1,13 @@
 class Vendor
   attr_reader :name,
-              :inventory,
-              :stock
+              :inventory
+              
+  attr_accessor :stock
 
   def initialize(name)
     @name = name
     @inventory = {}
-    @stock = 0
+    @stocks = 0
   end
 
   def check_stock(item)
@@ -14,8 +15,8 @@ class Vendor
   end
 
   def stock(item, amount)
+    @stocks = amount
     @inventory[item] = check_stock(item) + amount
-    @stock = amount
   end
 
   def potential_revenue
