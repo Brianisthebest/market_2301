@@ -52,8 +52,9 @@ RSpec.describe Market do
       @market.add_vendor(@vendor1)
       @market.add_vendor(@vendor2)
       @market.add_vendor(@vendor3)
+
+      expected = ['Banana Nice Cream', 'Peach', 'Peach-Raspberry Nice Cream', 'Tomato']
+      expect(@market.sorted_item_list).to eq(expected)
     end
-    expected = ['Banana Nice Cream', 'Peach', 'Peach-Raspberry Nice Cream', 'Tomato']
-    expect(@market.sorted_item_list).to eq(expected)
   end
 end
