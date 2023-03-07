@@ -72,5 +72,21 @@ RSpec.describe Market do
       expect(@market.total_inventory[@item4][:quantity]).to eq(50)
       expect(@market.total_inventory[@item4][:vendors]).to eq([@vendor2])
     end
+
+    it 'can report overstock' do
+      @vendor1.stock(@item1, 35)
+      @vendor1.stock(@item2, 7)
+      @vendor2.stock(@item1, 40)
+      @vendor2.stock(@item3, 50)
+      @market.add_vendor(@vendor1)
+      @market.add_vendor(@vendor2)
+    
+      expect(@market.overstocked_items).to eq([@item1])
+      # You `Market` will also be able to 
+      # identify `overstocked_items`.  An 
+      # item is overstocked if it is sold 
+      # by more than 1 vendor AND the 
+      # total quantity is greater than 50
+    end
   end
 end

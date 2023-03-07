@@ -47,6 +47,5 @@ class Market
       end
     end
     tot_inv
-    # require 'pry'; binding.pry
   end
 end
