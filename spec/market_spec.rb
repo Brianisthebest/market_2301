@@ -21,21 +21,39 @@ RSpec.describe Market do
   end
 
   it 'can add a vendor and list names' do
-    @market.add_vendor(@vendor1)   
+    @market.add_vendor(@vendor1)
     expect(@market.vendors).to eq([@vendor1])
-    expect(@market.vendor_names).to eq(['Rocks Mountain Fresh'])
-    @market.add_vendor(@vendor2) 
-    @market.add_vendor(@vendor3) 
+    expect(@market.vendor_names).to eq(['Rocky Mountain Fresh'])
+    @market.add_vendor(@vendor2)
+    @market.add_vendor(@vendor3)
     expect(@market.vendors).to eq([@vendor1, @vendor2, @vendor3])
     expect(@market.vendor_names).to eq(['Rocky Mountain Fresh', 'Ba-Nom-a-Nom', 'Palisade Peach Shack'])
   end
+
+  it 'can list vendors that sell an item' do
+    @vendor1.stock(@item1, 35)
+    @vendor1.stock(@item2, 7)
+    @vendor2.stock(@item4, 50)
+    @vendor2.stock(@item3, 25)
+    @vendor3.stock(@item1, 65)
+    
+    @market.add_vendor(@vendor1)
+    @market.add_vendor(@vendor2)
+    @market.add_vendor(@vendor3)
+
+    @market.add_vendor(@vendor1)
+    @market.add_vendor(@vendor2)
+    @market.add_vendor(@vendor3)
+
+    expect(@market.vendors_that_sell(@item1)).to eq([@vendor1, @vendor3])
+  end
 end
 
-# 3. Market #vendor_names
+
 # 4. Market #vendors_that_sell
 
-# It should have a method called `vendor_names` that returns an array of all the Vendor's names.
+# Additionally, the Market should have a method 
+# called `vendors_that_sell` that takes an 
+# argument of an item. It will return a list of
+# Vendors that have that item in stock.
 
-# Additionally, the Market should have a method called `vendors_that_sell` that takes an argument of an item. It will return a list of Vendors that have that item in stock.
-
-# Use TDD to create a `Market` class that responds to the following interaction pattern:
