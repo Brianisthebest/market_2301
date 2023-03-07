@@ -37,4 +37,16 @@ class Market
     end
     sorted_items.sort.uniq
   end
+
+  def total_inventory
+    tot_inv = Hash.new { |h, k| h[k] = { quantity: 0, vendors: [] } }
+    @vendors.each do |vendor|
+      vendor.inventory.each do |item, quantity|
+        tot_inv[item][:quantity] += quantity
+        tot_inv[item][:vendors] << vendor
+      end
+    end
+    tot_inv
+    # require 'pry'; binding.pry
+  end
 end

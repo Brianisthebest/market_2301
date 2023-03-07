@@ -64,13 +64,13 @@ RSpec.describe Market do
       @vendor2.stock(@item4, 50)
       @market.add_vendor(@vendor1)
       @market.add_vendor(@vendor2)
-      
-      expect(@market.total_inventory).to eq
-      {
-        @item1 => {:quantity => 35, :vendors => [@vendor1]},
-        @item2 => {:quantity => 7, :vendors => [@vendor1]},
-        @item3 => {:quantity => 50, :vendors => [@vendor2]}
-      }
+
+      expect(@market.total_inventory[@item1][:quantity]).to eq(35)
+      expect(@market.total_inventory[@item1][:vendors]).to eq([@vendor1])
+      expect(@market.total_inventory[@item2][:quantity]).to eq(7)
+      expect(@market.total_inventory[@item2][:vendors]).to eq([@vendor1])
+      expect(@market.total_inventory[@item4][:quantity]).to eq(50)
+      expect(@market.total_inventory[@item4][:vendors]).to eq([@vendor2])
     end
   end
 end
