@@ -44,12 +44,3 @@ RSpec.describe Market do
     expect(@market.vendors_that_sell(@item1)).to eq([@vendor1, @vendor3])
   end
 end
-
-
-# 4. Market #vendors_that_sell
-
-# Additionally, the Market should have a method 
-# called `vendors_that_sell` that takes an 
-# argument of an item. It will return a list of
-# Vendors that have that item in stock.
-
