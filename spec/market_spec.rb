@@ -91,13 +91,11 @@ RSpec.describe Market do
       @vendor2.stock(@item3, 50)
       @market.add_vendor(@vendor1)
       @market.add_vendor(@vendor2)
-      # can only sell items if in stock
-      # return false if not in stock
-      # return true if in stock
-      # then reduce the stock of vendors
-      # first vendor added before moving to next
-      @market.sell(@item1, 40)
+      
+      expect(@market.sell(@item1, 200)).to eq(false)
+      expect(@market.sell(@item1, 40)).to eq(true)
       expect(@vender1.stock(@item1)).to eq(0)
+      require 'pry'; binding.pry
       expect(@vender2.stock(@item1)).to eq(35)
     end
   end

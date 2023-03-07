@@ -58,4 +58,21 @@ class Market
     end
     overstocked_items
   end
+
+  def sell(item, quantity)
+    return false if total_inventory[item][:quantity] < quantity
+    vendors_selling = total_inventory[item][:vendors]
+    vendors_selling.each do |vendor|
+      stock = vendor.check_stock(item)
+      if stock <= quantity
+        quantity -= stock
+
+      end
+    end
+  end
 end
+# can only sell items if in stock
+# return false if not in stock
+# return true if in stock
+# then reduce the stock of vendors
+# first vendor added before moving to next
