@@ -83,5 +83,22 @@ RSpec.describe Market do
     
       expect(@market.overstocked_items).to eq([@item1])
     end
+
+    it 'can sell items' do
+      @vendor1.stock(@item1, 35)
+      @vendor1.stock(@item2, 7)
+      @vendor2.stock(@item1, 40)
+      @vendor2.stock(@item3, 50)
+      @market.add_vendor(@vendor1)
+      @market.add_vendor(@vendor2)
+      # can only sell items if in stock
+      # return false if not in stock
+      # return true if in stock
+      # then reduce the stock of vendors
+      # first vendor added before moving to next
+      @market.sell(@item1, 40)
+      expect(@vender1.stock(@item1)).to eq(0)
+      expect(@vender2.stock(@item1)).to eq(35)
+    end
   end
 end
